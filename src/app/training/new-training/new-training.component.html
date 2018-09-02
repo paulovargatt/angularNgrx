@@ -1,3 +1,26 @@
-<p>
-  new-training works!
-</p>
+<section class="new-training" fxLayout fxLayoutAlign="center">
+    <mat-card fxFlex="400px" fxFlex.xs="100%">
+        <mat-card-title fxLayoutAlign="center">Tempo para comeceçar</mat-card-title>
+        <mat-card-content>
+
+            <mat-form-field>
+                <mat-select placeholder="Favorite food" [(ngModel)]="selectedValue" name="food">
+                    <mat-option  value="1">
+                        Treino
+                    </mat-option>
+                    <mat-option  value="2">
+                        Treino 2
+                    </mat-option>
+                    <mat-option  value="3">
+                        Treino 3
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <p>You selected: {{selected}}</p>
+        </mat-card-content>
+        <mat-card-actions >
+            <button  color="primary" mat-raised-button mat-button (click)="onStartTraining()">Começar</button>
+        </mat-card-actions>
+    </mat-card>
+</section>

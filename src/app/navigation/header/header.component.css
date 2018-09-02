@@ -1,0 +1,17 @@
+a{
+    text-decoration: none;
+    color: white;
+}
+
+.menu-items{
+    list-style: none;
+    padding: 0px;
+}
+.menu-items li{
+    margin: 0 7px;
+    font-size: 0.8em;
+}
+
+.nav-caption{
+    padding: 0 5px;
+}

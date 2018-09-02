@@ -1,5 +1,5 @@
 import {NgModule} from "@angular/core";
-import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from "@angular/material-moment-adapter/";
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from "@angular/material-moment-adapter";
 import {
     MatButtonModule,
     MatIconModule,
@@ -7,15 +7,26 @@ import {
     MatDatepickerModule,
     DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE,
     MatCheckboxModule,
-    MatInputModule} from "@angular/material";
+    MatSidenavModule,
+    MatToolbarModule,
+    MatInputModule, MatListModule, MatTabsModule, MatCardModule, MatSelectModule, MatProgressSpinnerModule, MatDialogModule
+} from '@angular/material';
 
 
 @NgModule({
     imports:[
         MatButtonModule,
         MatIconModule,
+        MatDialogModule,
         MatInputModule,
         MatCheckboxModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatListModule,
+        MatTabsModule,
+        MatCardModule,
+        MatSelectModule,
+        MatProgressSpinnerModule,
         MatFormFieldModule],
     exports: [
         MatButtonModule,
@@ -23,6 +34,14 @@ import {
         MatInputModule,
         MatFormFieldModule,
         MatCheckboxModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatListModule,
+        MatTabsModule,
+        MatCardModule,
+        MatSelectModule,
+        MatDialogModule,
+        MatProgressSpinnerModule,
         MatDatepickerModule,
     ],
     providers: [
