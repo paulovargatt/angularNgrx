@@ -36,8 +36,9 @@ export class CurrentTrainingComponent implements OnInit {
                     progress: this.progress
                 }
             });
-        dialogRef.afterClosed()._subscribe(result => {
-            if (result) {
+        dialogRef.afterClosed().subscribe((result) => {
+            const response = (result as any);
+            if (response) {
                 this.trainingExit.emit();
             } else {
                 this.startOrResume();

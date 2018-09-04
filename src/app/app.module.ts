@@ -18,6 +18,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import {StopTrainingComponent} from './training/current-training/stop-training';
+import {AuthService} from './auth/auth.service';
 
 @NgModule({
     declarations: [
@@ -39,9 +40,9 @@ import {StopTrainingComponent} from './training/current-training/stop-training';
         MaterialModule,
         AppRoutingModule,
         FormsModule,
-        FlexLayoutModule
+        FlexLayoutModule,
     ],
-    providers: [],
+    providers: [AuthService],
     bootstrap: [AppComponent],
     entryComponents: [StopTrainingComponent]
 })
