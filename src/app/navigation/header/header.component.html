@@ -10,7 +10,7 @@
       <li *ngIf="!isAuth"><a routerLink="/signup">Cadastro </a></li>
       <li *ngIf="!isAuth"><a routerLink="/login">Login </a></li>
       <li *ngIf="isAuth"><a routerLink="/training">Treinos </a></li>
-      <li *ngIf="isAuth"><a>Logout </a></li>
+      <li *ngIf="isAuth"><a (click)="Onlogout()">Logout </a></li>
     </ul>
 
 
