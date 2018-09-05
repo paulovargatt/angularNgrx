@@ -1,4 +1,5 @@
 import {ExerciseModel} from './exercice.model';
+import {Subject} from 'rxjs';
 
 export class TrainingService {
     private availableExercices: ExerciseModel[] = [
@@ -8,7 +9,38 @@ export class TrainingService {
         { id: 'burpees', name: 'Burpees', duration: 60, calories: 8 }
     ];
 
+    private runningExercice: ExerciseModel;
+    exerciceChanged = new Subject();
+    private exercices;
+
     getAvailableExercices(){
         return this.availableExercices.slice();
+    }
+
+    startExercice(selectId: string){
+        this.runningExercice = this.availableExercices.find(ex => ex.id === selectId);
+        this.exerciceChanged.next({...this.runningExercice})
+    }
+
+    getRunningExercice(){
+        return {...this.runningExercice}
+    }
+
+    completeExercice(){
+        this.exercices.push({...this.runningExercice, date: new Date(), state: 'completed'})
+        this.runningExercice = null;
+        this.exerciceChanged.next(null)
+    }
+
+    cancelExercice(progress: number){
+        this.exercices.push({
+            ...this.runningExercice,
+            duration: this.runningExercice.duration * (progress / 100),
+            calories: this.runningExercice.duration * (progress / 100),
+            date: new Date(),
+            state: 'cancelled'
+        })
+        this.runningExercice = null;
+        this.exerciceChanged.next(null)
     }
 }
