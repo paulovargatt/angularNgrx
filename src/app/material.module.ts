@@ -9,12 +9,12 @@ import {
     MatCheckboxModule,
     MatSidenavModule,
     MatToolbarModule,
-    MatInputModule, MatListModule, MatTabsModule, MatCardModule, MatSelectModule, MatProgressSpinnerModule, MatDialogModule
+    MatInputModule, MatListModule, MatTabsModule, MatCardModule, MatSelectModule, MatProgressSpinnerModule, MatDialogModule, MatTableModule
 } from '@angular/material';
 
 
 @NgModule({
-    imports:[
+    imports: [
         MatButtonModule,
         MatIconModule,
         MatDialogModule,
@@ -27,6 +27,7 @@ import {
         MatCardModule,
         MatSelectModule,
         MatProgressSpinnerModule,
+        MatTableModule,
         MatFormFieldModule],
     exports: [
         MatButtonModule,
@@ -43,6 +44,7 @@ import {
         MatDialogModule,
         MatProgressSpinnerModule,
         MatDatepickerModule,
+        MatTableModule
     ],
     providers: [
         {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
