@@ -5,11 +5,21 @@ import {
     MatIconModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE,
+    DateAdapter,
+    MAT_DATE_FORMATS,
+    MAT_DATE_LOCALE,
     MatCheckboxModule,
     MatSidenavModule,
     MatToolbarModule,
-    MatInputModule, MatListModule, MatTabsModule, MatCardModule, MatSelectModule, MatProgressSpinnerModule, MatDialogModule, MatTableModule
+    MatInputModule,
+    MatListModule,
+    MatTabsModule,
+    MatCardModule,
+    MatSelectModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatTableModule,
+    MatSortModule, MatPaginatorModule
 } from '@angular/material';
 
 
@@ -28,6 +38,8 @@ import {
         MatSelectModule,
         MatProgressSpinnerModule,
         MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
         MatFormFieldModule],
     exports: [
         MatButtonModule,
@@ -44,6 +56,8 @@ import {
         MatDialogModule,
         MatProgressSpinnerModule,
         MatDatepickerModule,
+        MatSortModule,
+        MatPaginatorModule,
         MatTableModule
     ],
     providers: [

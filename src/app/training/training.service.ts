@@ -13,6 +13,7 @@ export class TrainingService {
     exerciceChanged = new Subject();
     private exercices: ExerciseModel[] = [];
 
+
     getAvailableExercices(){
         return this.availableExercices.slice();
     }
