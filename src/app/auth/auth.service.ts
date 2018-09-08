@@ -7,6 +7,7 @@ import {AngularFireAuth} from 'angularfire2/auth';
 import {TrainingService} from '../training/training.service';
 import {MatSnackBar} from '@angular/material';
 import {UiService} from '../shared/ui.service';
+import {Store} from '@ngrx/store';
 
 @Injectable()
 
@@ -19,7 +20,8 @@ export class AuthService {
                 private auth: AngularFireAuth,
                 private trainingService: TrainingService,
                 private snackbar: MatSnackBar,
-                private uiservice: UiService
+                private uiservice: UiService,
+                private store: Store<any>
 
     )
     {}
@@ -40,30 +42,37 @@ export class AuthService {
     }
 
     registerUser(authData: AuthDataModel) {
-        this.uiservice.loadingStateChanged.next(true);
+       //this.uiservice.loadingStateChanged.next(true);
+        this.store.dispatch({type: 'START_LOADING'})
         this.auth.auth.createUserWithEmailAndPassword(
             authData.email,
             authData.password
         ).then(result => {
-            this.uiservice.loadingStateChanged.next(false);
+            //this.uiservice.loadingStateChanged.next(false);
+            this.store.dispatch({type: 'STOP_LOADING'})
 
-            }).catch(err => {
-            this.uiservice.loadingStateChanged.next(false);
+        }).catch(err => {
+          //  this.uiservice.loadingStateChanged.next(false);
+            this.store.dispatch({type: 'STOP_LOADING'})
             this.uiservice.showSnackbar(err.message, null, 3000);
         });
    }
 
     login(authData: AuthDataModel) {
-        this.uiservice.loadingStateChanged.next(true);
+        //this.uiservice.loadingStateChanged.next(true);
+        this.store.dispatch({type: 'START_LOADING'})
 
         this.auth.auth.signInWithEmailAndPassword(
             authData.email,
             authData.password
         ).then(result => {
-            this.uiservice.loadingStateChanged.next(false);
+          //  this.uiservice.loadingStateChanged.next(false);
+            this.store.dispatch({type: 'STOP_LOADING'})
 
         }).catch(err => {
-            this.uiservice.loadingStateChanged.next(false);
+          //  this.uiservice.loadingStateChanged.next(false);
+            this.store.dispatch({type: 'STOP_LOADING'})
+
             this.snackbar.open(err.message, null,{
                 duration: 3000
             })

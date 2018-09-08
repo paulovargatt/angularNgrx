@@ -24,6 +24,8 @@ import {TrainingService} from './training/training.service';
 import {environment} from '../environments/environment';
 import {AngularFireAuthModule} from 'angularfire2/auth';
 import {UiService} from './shared/ui.service';
+import {StoreModule} from '@ngrx/store';
+import {appReducer} from './app.reducer';
 
 @NgModule({
     declarations: [
@@ -48,7 +50,8 @@ import {UiService} from './shared/ui.service';
         FlexLayoutModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFirestoreModule,
-        AngularFireAuthModule
+        AngularFireAuthModule,
+        StoreModule.forRoot({ui: appReducer})
     ],
     providers: [AuthService, TrainingService,UiService],
     bootstrap: [AppComponent],

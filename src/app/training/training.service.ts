@@ -29,11 +29,12 @@ export class TrainingService {
             .pipe(map(docArray => {
                // throw (new Error())
                 return docArray.map(doc => {
+                    const ret = (doc as any)
                     return {
-                        id: doc.payload.doc.id,
-                        name: doc.payload.doc.data().name,
-                        duration: doc.payload.doc.data().duration,
-                        calories: doc.payload.doc.data().calories,
+                        id: ret.payload.doc.id,
+                        name: ret.payload.doc.data().name,
+                        duration: ret.payload.doc.data().duration,
+                        calories: ret.payload.doc.data().calories,
                    };
                });
             })).subscribe(exercices => {
@@ -84,7 +85,8 @@ export class TrainingService {
     fetchCompletedOrCancelledExercices(){
         this.fbSubs.push(
         this.db.collection('finishedExercices').valueChanges().subscribe((exercices) => {
-            this.finishdExercicesChanged.next(exercices);
+            const retornoExercices = (exercices as any)
+            this.finishdExercicesChanged.next(retornoExercices);
         }))
     }
 
