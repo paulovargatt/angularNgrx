@@ -2,7 +2,7 @@
 
   <form fxLayout="column" fxLayoutAlign="center center" #f="ngForm" fxLayoutGap="15px"
         (ngSubmit)="onSubmit(f)">
-    <mat-form-field>
+    <mat-form-field *ngIf="!isLoading">
 
       <input type="email" required matInput placeholder="Email" ngModel name="email"
              #emailInput="ngModel"
@@ -11,14 +11,15 @@
       <mat-error *ngIf="!emailInput.hasError('required')">Email Inválido</mat-error>
     </mat-form-field>
 
-    <mat-form-field hintLabel="6 Caracteres">
+    <mat-form-field hintLabel="6 Caracteres" *ngIf="!isLoading">
       <input type="password" minlength="6" required matInput placeholder="Senha" ngModel name="password"
              #pwInput="ngModel"  >
       <mat-hint align="end">{{pwInput.value?.length}} / 6</mat-hint>
     </mat-form-field>
 
+    <button *ngIf="!isLoading" type="submit" [disabled]="f.invalid" mat-raised-button color="primary">Entrar</button>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
 
-    <button  type="submit" [disabled]="f.invalid" mat-raised-button color="primary">Entrar</button>
 
   </form>
 </section>
