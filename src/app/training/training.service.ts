@@ -3,6 +3,7 @@ import {Subject, Subscriber, Subscription} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from 'angularfire2/firestore';
 import {map} from 'rxjs/operators';
+import {UiService} from '../shared/ui.service';
 
 @Injectable()
 
@@ -19,25 +20,31 @@ export class TrainingService {
 
     private fbSubs: Subscription[] = [];
 
-    constructor(private db: AngularFirestore){}
+    constructor(private db: AngularFirestore, private uiService: UiService){}
 
 
     fetchAvailableExercices(){
      this.fbSubs.push(this.db.collection('availableExercices')
             .snapshotChanges()
             .pipe(map(docArray => {
+               // throw (new Error())
                 return docArray.map(doc => {
                     return {
                         id: doc.payload.doc.id,
                         name: doc.payload.doc.data().name,
                         duration: doc.payload.doc.data().duration,
                         calories: doc.payload.doc.data().calories,
-                    };
-                });
+                   };
+               });
             })).subscribe(exercices => {
                 this.availableExercices  = exercices;
                 this.exercicesChanged.next([...this.availableExercices]);
-            }));
+            },error=> {
+                this.uiService.loadingStateChanged.next(false);
+                this.uiService.showSnackbar('Erro, tente novamente', null,3000);
+                this.exercicesChanged.next(null);
+
+         }));
         };
 
     private addDataFirebase(exercice) {

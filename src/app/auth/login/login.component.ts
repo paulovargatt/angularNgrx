@@ -11,7 +11,7 @@ import {Subscription} from 'rxjs';
 })
 export class LoginComponent implements OnInit, OnDestroy {
     loginForm;
-    isLoading = false;
+    isLoading:boolean = false;
     private loadingSub: Subscription;
 
     constructor(private authService: AuthService,
@@ -21,7 +21,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.loadingSub = this.uiService.loadingStateChanged.subscribe((loadingState) => {
-            this.isLoading = loadingState;
+            const load = (loadingState as any);
+            this.isLoading = load;
         })
         this.loginForm = new FormGroup({
             email: new FormControl('', {

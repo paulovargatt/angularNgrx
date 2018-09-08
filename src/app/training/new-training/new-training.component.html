@@ -2,7 +2,7 @@
     <form (ngSubmit)="onStartTraining(f)" #f="ngForm">
         <mat-card fxFlex="400px" fxFlex.xs="100%">
             <mat-card-title fxLayoutAlign="center">Tempo para comeceçar</mat-card-title>
-            <mat-card-content>
+            <mat-card-content *ngIf="exercices">
 
                 <mat-form-field>
                     <mat-select placeholder="Escolha um exercicio" ngModel name="exercice" [required]>
@@ -14,9 +14,12 @@
 
             </mat-card-content>
             <mat-card-actions >
-                <button type="submit" [disabled]="f.invalid" color="primary"
-                        mat-raised-button mat-button>Começar</button>
+               <button *ngIf="exercices" type="submit" [disabled]="f.invalid" color="primary" mat-raised-button mat-button>Começar</button>
+                <button *ngIf="!exercices" (click)="fetchExercice()"  color="primary" mat-raised-button mat-button>Carregue novamente</button>
+
             </mat-card-actions>
         </mat-card>
     </form>
+
+
 </section>
