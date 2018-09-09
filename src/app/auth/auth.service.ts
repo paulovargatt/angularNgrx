@@ -8,6 +8,9 @@ import {TrainingService} from '../training/training.service';
 import {MatSnackBar} from '@angular/material';
 import {UiService} from '../shared/ui.service';
 import {Store} from '@ngrx/store';
+import * as UI from '../shared/ui.actions'
+import * as Auth from './auth.actions';
+
 
 @Injectable()
 
@@ -29,49 +32,48 @@ export class AuthService {
     initAuthListener(){
         this.auth.authState.subscribe((user)=>{
             if(user){
-                this.isAuthenticate = true;
-                this.authChange.next(true);
+                this.store.dispatch(new Auth.Authenticated())
                 this.router.navigate(['/training']);
             }else{
                 this.trainingService.cancelSubscription();
-                this.authChange.next(false);
+                this.store.dispatch(new Auth.Unauthenticated())
                 this.router.navigate(['']);
-                this.isAuthenticate = false;
             }
         })
     }
 
     registerUser(authData: AuthDataModel) {
        //this.uiservice.loadingStateChanged.next(true);
-        this.store.dispatch({type: 'START_LOADING'})
+        this.store.dispatch(new UI.StartLoading())
         this.auth.auth.createUserWithEmailAndPassword(
             authData.email,
             authData.password
         ).then(result => {
             //this.uiservice.loadingStateChanged.next(false);
-            this.store.dispatch({type: 'STOP_LOADING'})
+            this.store.dispatch(new UI.StopLoading())
 
         }).catch(err => {
           //  this.uiservice.loadingStateChanged.next(false);
-            this.store.dispatch({type: 'STOP_LOADING'})
+            this.store.dispatch(new UI.StopLoading())
             this.uiservice.showSnackbar(err.message, null, 3000);
         });
    }
 
     login(authData: AuthDataModel) {
         //this.uiservice.loadingStateChanged.next(true);
-        this.store.dispatch({type: 'START_LOADING'})
-
+        this.store.dispatch(new UI.StartLoading())
         this.auth.auth.signInWithEmailAndPassword(
             authData.email,
             authData.password
         ).then(result => {
           //  this.uiservice.loadingStateChanged.next(false);
-            this.store.dispatch({type: 'STOP_LOADING'})
+            this.store.dispatch(new UI.StopLoading())
+
 
         }).catch(err => {
           //  this.uiservice.loadingStateChanged.next(false);
-            this.store.dispatch({type: 'STOP_LOADING'})
+            this.store.dispatch(new UI.StopLoading())
+
 
             this.snackbar.open(err.message, null,{
                 duration: 3000
@@ -85,11 +87,5 @@ export class AuthService {
         this.authChange.next(false);
         this.router.navigate(['']);
         this.isAuthenticate = false;
-    }
-
-
-
-    isAuth() {
-        return this.isAuthenticate;
     }
 }
